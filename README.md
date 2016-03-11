@@ -4,10 +4,4 @@
   * NuGet: https://www.nuget.org/packages/Affecto.Wcf.Behaviors
 
 ## Build status
-
-| Target | Build |
-| -----------------------|------------------|
-| Project | [![Build status](https://ci.appveyor.com/api/projects/status/krawdtt0awl0r6ew?svg=true)](https://ci.appveyor.com/project/affecto/dotnet-wcf.behaviors) |
-| Master branch | [![Build status](https://ci.appveyor.com/api/projects/status/krawdtt0awl0r6ew/branch/master?svg=true)](https://ci.appveyor.com/project/affecto/dotnet-wcf.behaviors/branch/master) |
-| Dev branch | [![Build status](https://ci.appveyor.com/api/projects/status/krawdtt0awl0r6ew/branch/dev?svg=true)](https://ci.appveyor.com/project/affecto/dotnet-wcf.behaviors/branch/dev) |
-
+[![Build status](https://ci.appveyor.com/api/projects/status/h91wctg74fc6xai0?svg=true)](https://ci.appveyor.com/project/affecto/dotnet-wcf-behaviors)

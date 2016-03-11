@@ -4,9 +4,8 @@ pull_requests:
 nuget:
   disable_publish_on_pr: true
 before_build:
-- cmd: nuget restore
+- cmd: nuget restore source\Wcf.Behaviors.sln
 build:
-  project: Source\Wcf.Behaviors.sln
   publish_nuget: true
   publish_nuget_symbols: true
   include_nuget_references: true
