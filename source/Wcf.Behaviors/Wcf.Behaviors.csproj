@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseDocument.cs" />
     <Compile Include="ResponseNamespaceRemovalBehaviour.cs" />
     <Compile Include="ResponseNamespaceRemover.cs" />
   </ItemGroup>
