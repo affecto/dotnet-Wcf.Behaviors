@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace Affecto.Wcf.Behaviors
@@ -17,20 +16,11 @@ namespace Affecto.Wcf.Behaviors
         public void AfterReceiveReply(ref Message reply, object correlationState)
         {
             MemoryStream stream = new MemoryStream();
-            XmlDocument document = GetReplyDocument(reply, stream);
-            RemoveBodyNodeNamespaces(document);
-            WriteNodeToStream(stream, document);
+            ResponseDocument responseDocument = GetReplyDocument(reply, stream);
+            responseDocument.RemoveReturnDataNamespaces();
+            WriteNodeToStream(stream, responseDocument.Document);
             XmlReader reader = XmlReader.Create(stream);
             reply = Message.CreateMessage(reader, int.MaxValue, reply.Version);            
-        }
-
-        private static void RemoveBodyNodeNamespaces(XmlDocument document)
-        {
-            const string bodyElement = "SOAP-ENV:Body";
-            XmlNode responseBodyNode = document.GetElementsByTagName(bodyElement)[0].ChildNodes[0];
-            string responseBody = responseBodyNode.InnerXml;
-            string responseWithNoNamespaces = Regex.Replace(Regex.Replace(responseBody, @"<\w+:", "<"), @"</\w+:", "</");
-            responseBodyNode.InnerXml = responseWithNoNamespaces;
         }
 
         private static void WriteNodeToStream(Stream stream, XmlNode node)
@@ -44,7 +34,7 @@ namespace Affecto.Wcf.Behaviors
             stream.Position = 0;
         }
 
-        private static XmlDocument GetReplyDocument(Message reply, Stream stream)
+        private static ResponseDocument GetReplyDocument(Message reply, Stream stream)
         {
             XmlDocument doc = new XmlDocument();
             using (XmlWriter writer = XmlWriter.Create(stream))
@@ -54,7 +44,7 @@ namespace Affecto.Wcf.Behaviors
             }
             stream.Position = 0;
             doc.Load(stream);
-            return doc;
+            return ResponseDocument.Load(doc);
         }
     }
 }
